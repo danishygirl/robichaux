@@ -1,4 +1,4 @@
-# COVEN — RPG "Robichaux"
+# COVEN — "Robichaux"
 
 Projeto novo e independente, pronto para ser versionado no GitHub e publicado com Cloudflare Workers Static Assets.
 
