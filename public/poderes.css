@@ -888,59 +888,75 @@ body[data-page="poderes"] {
   }
 }
 /* =========================================================
-   IMAGENS DAS CARTAS DE PODER
-   ========================================================= */
-
-/* =========================================================
-   CARTAS DE PODER COM IMAGEM
+   CARD DE PODER = CARTA COMPLETA
    ========================================================= */
 
 .power-card.has-card-image {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  gap: 1rem;
-}
-
-.power-card.has-card-image .power-symbol-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  min-height: 220px;
-  padding: 0.75rem;
+  position: relative;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-sizing: border-box;
+
+  width: 100%;
+  aspect-ratio: 2 / 3;
+
+  padding: 0;
+  margin: 0;
+
+  display: block;
+
+  background: transparent;
 }
 
-.power-card.has-card-image .power-symbol-box.has-image {
-  padding: 0.75rem;
+/* A imagem ocupa absolutamente todo o card */
+.power-card.has-card-image .power-symbol-box {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  display: block;
+
+  border: 0;
+  background: transparent;
+  overflow: hidden;
 }
 
+/* A carta cobre todo o espaço */
 .power-card.has-card-image .power-card-image {
   width: 100%;
   height: 100%;
+
   display: block;
-  object-fit: contain;
+
+  object-fit: cover;
   object-position: center;
+
+  margin: 0;
+  padding: 0;
+
+  max-width: none;
 }
 
+/* Remove todos os textos do card */
 .power-card.has-card-image .power-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  width: 100%;
-  min-width: 0;
+  display: none;
 }
 
-.power-card.has-card-image .power-name,
-.power-card.has-card-image .power-summary,
-.power-card.has-card-image .power-family,
-.power-card.has-card-image .power-open {
-  position: relative;
-  z-index: 1;
+/* Remove número de nível */
+.power-card.has-card-image .power-level-flag {
+  display: none;
 }
+
+/* Remove decoração antiga que ficava por cima */
+.power-card.has-card-image .power-card-accent {
+  display: none;
+}
+
+/* Remove qualquer símbolo antigo */
+.power-card.has-card-image .power-symbol {
+  display: none;
+}
+
