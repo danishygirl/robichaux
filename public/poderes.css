@@ -891,22 +891,56 @@ body[data-page="poderes"] {
    IMAGENS DAS CARTAS DE PODER
    ========================================================= */
 
-.power-symbol-box.has-image {
-  padding: 0;
-  overflow: hidden;
-  position: relative;
-  background: transparent;
+/* =========================================================
+   CARTAS DE PODER COM IMAGEM
+   ========================================================= */
+
+.power-card.has-card-image {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 1rem;
 }
 
-.power-card-image {
-  display: block;
+.power-card.has-card-image .power-symbol-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-height: 220px;
+  padding: 0.75rem;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.power-card.has-card-image .power-symbol-box.has-image {
+  padding: 0.75rem;
+}
+
+.power-card.has-card-image .power-card-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  display: block;
+  object-fit: contain;
   object-position: center;
 }
 
-/* mantém a imagem suave e evita comportamento estranho */
-.power-symbol-box.has-image img {
-  max-width: none;
+.power-card.has-card-image .power-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.power-card.has-card-image .power-name,
+.power-card.has-card-image .power-summary,
+.power-card.has-card-image .power-family,
+.power-card.has-card-image .power-open {
+  position: relative;
+  z-index: 1;
 }
