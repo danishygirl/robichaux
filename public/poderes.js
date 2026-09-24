@@ -265,18 +265,18 @@ const buildCard = (power, sourceIndex) => {
   symbolBox.setAttribute("aria-hidden", "true");
 
   // Se existir uma imagem, usa a carta WEBP
-  if (power.image) {
+ if (power.image) {
     const image = document.createElement("img");
-
     image.className = "power-card-image";
     image.src = power.image;
     image.alt = "";
     image.loading = "lazy";
     image.decoding = "async";
 
+    card.classList.add("has-card-image");
     symbolBox.classList.add("has-image");
     symbolBox.appendChild(image);
-  } else {
+} else {
     // Se não houver imagem, continua usando o símbolo antigo
     const symbol = document.createElement("span");
 
