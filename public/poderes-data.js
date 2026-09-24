@@ -63,6 +63,7 @@ window.COVEN_POWERS = {
       origin: "BRUXAS",
       categorias: ["seven-wonders", "bruxas"],
       symbol: "✦",
+      image: "assets/poderes/telecinese.webp",
       summary: "Mover objetos, corpos e barreiras apenas com a força da mente.",
       description: "A Telecinese é uma das Sete Maravilhas e representa o controle mental sobre a matéria. No RPG, pode servir tanto para combate quanto para investigação, defesa e manipulação precisa do ambiente.",
       unlock: "Disponível para bruxas com treinamento arcano. Cada novo nível exige foco, disciplina e gasto de XP acumulado.",
