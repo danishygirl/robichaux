@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#c6c0b5" />
+  <title>COVEN — Poderes</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./home.css" />
+  <link rel="stylesheet" href="./poderes.css" />
+</head>
+<body data-page="poderes">
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="mystic-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="./index.html" aria-label="COVEN — Home">
+      <span class="brand-mark">C</span>
+      <span class="brand-text">COVEN</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="Menu principal"></nav>
+
+    <button class="power-button" id="powerButton" type="button" aria-label="Alternar efeitos visuais" title="Alternar efeitos visuais">
+      <span class="power-icon" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <main class="powers-stage">
+    <section class="powers-shell" aria-labelledby="powersTitle">
+      <header class="powers-heading">
+        <div>
+          <p class="eyebrow" id="powersEyebrow"></p>
+          <h1 id="powersTitle"></h1>
+        </div>
+        <p class="powers-subtitle" id="powersSubtitle"></p>
+      </header>
+
+      <div class="archive-rule" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+
+      <section class="powers-filterbar" aria-label="Filtrar poderes por categoria">
+        <div class="power-filters" id="powerFilters" role="group" aria-label="Categorias"></div>
+        <div class="filter-status" id="filterStatus" aria-live="polite"></div>
+      </section>
+
+      <div class="powers-grid" id="powerGrid" aria-live="polite"></div>
+      <p class="power-empty" id="powerEmpty" hidden>NENHUM PODER REGISTRADO NESTA CATEGORIA.</p>
+
+      <footer class="archive-footer">
+        <span>SELECT // OPEN ABILITY FILE</span>
+        <span id="powerCount"></span>
+      </footer>
+    </section>
+  </main>
+
+  <dialog class="power-dialog" id="powerDialog" aria-labelledby="abilityName">
+    <article class="ability-sheet" id="abilitySheet">
+      <button class="sheet-close" id="sheetClose" type="button" aria-label="Fechar ficha do poder">×</button>
+
+      <header class="sheet-topbar">
+        <div class="sheet-seal" aria-hidden="true">
+          <span class="seal-ring"></span>
+          <strong>C</strong>
+        </div>
+        <div class="sheet-agency-copy">
+          <span>ROBICHAUX ACADEMY</span>
+          <span>ARCANE ABILITY REGISTER</span>
+          <span>NEW ORLEANS // LOUISIANA</span>
+        </div>
+        <div class="sheet-file-code" id="abilityCode"></div>
+      </header>
+
+      <div class="sheet-titleline">
+        <span>ABILITY DOSSIER</span>
+        <span id="abilityFamilyTop"></span>
+      </div>
+
+      <div class="sheet-layout">
+        <aside class="ability-overview">
+          <div class="ability-cardface">
+            <div class="ability-symbol-box">
+              <span class="ability-symbol" id="abilitySymbol"></span>
+            </div>
+            <div class="ability-cardmeta">
+              <span class="ability-family" id="abilityFamily"></span>
+              <h2 id="abilityName"></h2>
+              <p id="abilityShort"></p>
+            </div>
+          </div>
+
+          <div class="sheet-identity" id="abilityIdentity"></div>
+
+          <section class="sheet-mini-section" id="abilityTagsSection">
+            <h3>TAGS</h3>
+            <div class="ability-tags" id="abilityTags"></div>
+          </section>
+
+          <div class="sheet-extras" id="abilityExtras"></div>
+        </aside>
+
+        <section class="ability-details">
+          <section class="sheet-section" id="descriptionSection">
+            <h3>DESCRIÇÃO</h3>
+            <p id="abilityDescription"></p>
+          </section>
+
+          <section class="sheet-section" id="unlockSection">
+            <h3>REQUISITOS // DESBLOQUEIO</h3>
+            <p id="abilityUnlock"></p>
+          </section>
+
+          <section class="sheet-section">
+            <div class="section-head-combo">
+              <h3>PROGRESSÃO DE NÍVEIS</h3>
+              <span class="xp-total" id="abilityTotalXp"></span>
+            </div>
+            <div class="levels-list" id="abilityLevels"></div>
+          </section>
+        </section>
+      </div>
+
+      <footer class="sheet-footer">
+        <div class="signature" aria-hidden="true">Coven</div>
+        <div class="footer-codes">
+          <span>ARTICLE 09</span>
+          <span>ARCANE FILE</span>
+          <strong id="abilityFooterCode"></strong>
+        </div>
+      </footer>
+    </article>
+  </dialog>
+
+  <div class="status-line" aria-hidden="true">
+    <span>ROBICHAUX // ARCHIVE 03</span>
+    <span>ARCANE ABILITIES</span>
+  </div>
+
+  <script src="./site-data.js"></script>
+  <script src="./poderes-data.js"></script>
+  <script src="./poderes.js"></script>
+</body>
+</html>
