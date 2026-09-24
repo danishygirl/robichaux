@@ -1,4 +1,4 @@
-# COVEN — site do RPG
+# COVEN — site do RPG "Robichaux"
 
 Projeto novo e independente, pronto para ser versionado no GitHub e publicado com Cloudflare Workers Static Assets.
 
