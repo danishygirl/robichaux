@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="ADAGA">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#efe9df"/>
+      <stop offset="100%" stop-color="#d6cfc3"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="480" fill="url(#bg)"/>
+  <rect x="28" y="28" width="424" height="424" fill="none" stroke="#57534d" stroke-opacity="0.18"/>
+  <path d="M0 0 L480 0 L480 170 Q240 210 0 270 Z" fill="#d48f3f" fill-opacity="0.65"/>
+  <text x="240" y="232" text-anchor="middle" font-size="138" fill="#4b4741" font-family="Arial, sans-serif">✦</text>
+  <text x="240" y="385" text-anchor="middle" font-size="32" fill="#4b4741" font-family="Arial, sans-serif" letter-spacing="3">ADAGA</text>
+</svg>
