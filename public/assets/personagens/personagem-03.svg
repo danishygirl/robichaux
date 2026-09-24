@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960">
+  <defs><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3"/></filter><radialGradient id="bg"><stop stop-color="#ddd8ce"/><stop offset="1" stop-color="#9f9a90"/></radialGradient></defs>
+  <rect width="720" height="960" fill="url(#bg)"/>
+  <g opacity=".18" stroke="#4a4842" fill="none"><circle cx="360" cy="420" r="280"/><path d="M360 105 560 700 160 700Z"/><path d="M175 260h370M138 560h444"/></g>
+  <g fill="#53504a"><ellipse cx="360" cy="325" rx="111" ry="141"/><path d="M160 850c20-218 112-324 200-324 89 0 180 106 200 324Z"/></g>
+  <path d="M250 282c40-81 81-113 118-113 48 0 82 43 104 118-67-36-150-39-222-5Z" fill="#363531" opacity=".48"/>
+  <rect width="720" height="960" filter="url(#n)" opacity=".1"/>
+  <g fill="#45433f" opacity=".16" font-family="monospace" font-size="18"><text x="34" y="60">HNT // SUBJECT 009</text><text x="34" y="915">FIELD RECORD // OCCULT AFFAIRS</text></g>
+</svg>

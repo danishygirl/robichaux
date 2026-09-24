@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960">
+  <defs><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="4"/></filter><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#d8d3c9"/><stop offset="1" stop-color="#99948a"/></linearGradient></defs>
+  <rect width="720" height="960" fill="url(#bg)"/>
+  <g opacity=".18" stroke="#494742" fill="none"><path d="M90 150h540v660H90z"/><circle cx="360" cy="430" r="244"/><path d="M90 430h540M360 150v660"/></g>
+  <g fill="#504e49"><ellipse cx="360" cy="325" rx="106" ry="137"/><path d="M150 850c27-221 117-323 210-323s183 102 210 323Z"/></g>
+  <g fill="#cfc9bf" opacity=".18"><path d="M256 313c36-97 72-137 111-137 40 0 81 49 103 142-66-42-144-44-214-5Z"/></g>
+  <rect width="720" height="960" filter="url(#n)" opacity=".11"/>
+  <g fill="#45433f" opacity=".16" font-family="monospace" font-size="18"><text x="34" y="60">NOLA // SUBJECT 017</text><text x="34" y="915">CIVILIAN INDEX // RESTRICTED</text></g>
+</svg>

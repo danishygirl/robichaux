@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#c6c0b5" />
+  <title>COVEN — Personagens</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./home.css" />
+  <link rel="stylesheet" href="./personagens.css" />
+</head>
+<body data-page="personagens">
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="mystic-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="./index.html" aria-label="COVEN — Home">
+      <span class="brand-mark">C</span>
+      <span class="brand-text">COVEN</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="Menu principal"></nav>
+
+    <button class="power-button" id="powerButton" type="button" aria-label="Alternar efeitos visuais" title="Alternar efeitos visuais">
+      <span class="power-icon" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <main class="characters-stage">
+    <section class="characters-shell" aria-labelledby="charactersTitle">
+      <i class="corner corner-tl" aria-hidden="true"></i>
+      <i class="corner corner-tr" aria-hidden="true"></i>
+      <i class="corner corner-bl" aria-hidden="true"></i>
+      <i class="corner corner-br" aria-hidden="true"></i>
+
+      <header class="characters-heading">
+        <div>
+          <p class="eyebrow" id="charactersEyebrow"></p>
+          <h1 id="charactersTitle"></h1>
+        </div>
+        <p class="characters-subtitle" id="charactersSubtitle"></p>
+      </header>
+
+      <div class="archive-rule" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+
+      <section class="character-filterbar" aria-label="Filtrar personagens por categoria">
+        <div class="character-filters" id="characterFilters" role="group" aria-label="Categorias"></div>
+        <div class="filter-status" id="filterStatus" aria-live="polite"></div>
+      </section>
+
+      <div class="character-grid" id="characterGrid" aria-live="polite"></div>
+      <p class="character-empty" id="characterEmpty" hidden>NENHUM REGISTRO NESTA CATEGORIA.</p>
+
+      <footer class="archive-footer">
+        <span>SELECT // OPEN DOSSIER</span>
+        <span id="characterCount"></span>
+      </footer>
+    </section>
+  </main>
+
+  <dialog class="character-dialog" id="characterDialog" aria-labelledby="dossierName">
+    <article class="dossier" id="dossier">
+      <button class="dossier-close" id="dossierClose" type="button" aria-label="Fechar dossiê">×</button>
+
+      <div class="dossier-watermark" aria-hidden="true">COVEN</div>
+      <div class="dossier-crosshair dossier-crosshair-a" aria-hidden="true"></div>
+      <div class="dossier-crosshair dossier-crosshair-b" aria-hidden="true"></div>
+
+      <header class="dossier-topbar">
+        <div class="seal" aria-hidden="true">
+          <span class="seal-ring"></span>
+          <strong>C</strong>
+        </div>
+        <div class="agency-copy">
+          <span>ROBICHAUX ACADEMY</span>
+          <span>ARCHIVE OF OCCULT AFFAIRS</span>
+          <span>NEW ORLEANS // LOUISIANA</span>
+        </div>
+        <div class="file-code" id="dossierCode"></div>
+      </header>
+
+      <div class="dossier-titleline">
+        <span>PERSONNEL DOSSIER</span>
+        <span id="dossierClassTop"></span>
+      </div>
+
+      <div class="dossier-layout">
+        <section class="dossier-identity">
+          <figure class="portrait-sheet">
+            <img id="dossierImage" src="" alt="" />
+            <figcaption id="dossierImageCode"></figcaption>
+          </figure>
+
+          <div class="identity-fields" id="identityFields"></div>
+        </section>
+
+        <section class="dossier-biography">
+          <div class="biography-heading">
+            <span>SUBJECT PROFILE</span>
+            <span class="redaction" aria-hidden="true"></span>
+          </div>
+
+          <h2 id="dossierName"></h2>
+
+          <div class="dossier-section" id="powerSection">
+            <h3>PODER</h3>
+            <div id="dossierPower"></div>
+          </div>
+
+          <div class="dossier-section" id="storySection">
+            <h3>HISTÓRIA</h3>
+            <p id="dossierStory"></p>
+          </div>
+
+          <div class="dossier-section" id="deckSection">
+            <h3>DECK // INVENTÁRIO</h3>
+            <ul class="deck-list" id="dossierDeck"></ul>
+          </div>
+
+          <div class="dossier-extras" id="dossierExtras"></div>
+        </section>
+      </div>
+
+      <footer class="dossier-footer">
+        <div class="signature" aria-hidden="true">Coven</div>
+        <div class="footer-codes">
+          <span>ARTICLE 07</span>
+          <span>ARCHIVE 02</span>
+          <strong id="dossierFooterCode"></strong>
+        </div>
+      </footer>
+    </article>
+  </dialog>
+
+  <div class="status-line" aria-hidden="true">
+    <span>ROBICHAUX // ARCHIVE 02</span>
+    <span>PERSONNEL RECORDS</span>
+  </div>
+
+  <script src="./site-data.js"></script>
+  <script src="./personagens-data.js"></script>
+  <script src="./personagens.js"></script>
+</body>
+</html>

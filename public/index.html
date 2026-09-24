@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#c6c0b5" />
+  <title>COVEN — Home</title>
+
+  <!-- Alternativa web próxima ao visual condensado da referência. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./home.css" />
+</head>
+<body data-page="home">
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="mystic-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="./index.html" aria-label="COVEN — Home">
+      <span class="brand-mark">C</span>
+      <span class="brand-text">COVEN</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="Menu principal"></nav>
+
+    <button class="power-button" id="powerButton" type="button" aria-label="Alternar efeitos visuais" title="Alternar efeitos visuais">
+      <span class="power-icon" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <main class="home-stage">
+    <section class="home-frame" aria-labelledby="homeTitle">
+      <i class="corner corner-tl" aria-hidden="true"></i>
+      <i class="corner corner-tr" aria-hidden="true"></i>
+      <i class="corner corner-bl" aria-hidden="true"></i>
+      <i class="corner corner-br" aria-hidden="true"></i>
+
+      <div class="sigil sigil-top" aria-hidden="true">✦</div>
+      <div class="sigil sigil-bottom" aria-hidden="true">◇</div>
+
+      <header class="panel-header">
+        <p class="eyebrow">ROBICHAUX ACADEMY // NEW ORLEANS</p>
+        <h1 id="homeTitle">COVEN</h1>
+        <div class="heading-rule" aria-hidden="true"></div>
+      </header>
+
+      <div class="story-window" tabindex="0" aria-label="Introdução ao RPG COVEN">
+        <div class="story-copy" id="homeCopy"></div>
+      </div>
+
+      <div class="home-actions" id="homeActions"></div>
+    </section>
+  </main>
+
+  <div class="status-line" aria-hidden="true">
+    <span>ROBICHAUX // ARCHIVE 01</span>
+    <span>NEW ORLEANS</span>
+  </div>
+
+  <script src="./site-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

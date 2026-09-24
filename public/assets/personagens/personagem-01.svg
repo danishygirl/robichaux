@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960">
+  <defs>
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="4"/><feBlend mode="multiply" in2="SourceGraphic"/></filter>
+    <radialGradient id="bg"><stop offset="0" stop-color="#e2ddd3"/><stop offset="1" stop-color="#aaa49a"/></radialGradient>
+  </defs>
+  <rect width="720" height="960" fill="url(#bg)"/>
+  <g opacity=".19" stroke="#4b4944" fill="none">
+    <circle cx="360" cy="430" r="260"/><circle cx="360" cy="430" r="170"/><path d="M360 90 610 660 110 660Z"/><path d="M100 180 620 700M620 180 100 700"/>
+  </g>
+  <g fill="#57544e">
+    <ellipse cx="360" cy="330" rx="115" ry="145"/>
+    <path d="M174 850c15-236 96-334 186-334s171 98 186 334Z"/>
+  </g>
+  <g opacity=".28" fill="#d7d1c7"><path d="M292 319c25-16 47-23 68-23s45 7 70 23c-15-76-35-111-70-111-36 0-55 34-68 111Z"/></g>
+  <rect width="720" height="960" filter="url(#n)" opacity=".12"/>
+  <g fill="#45433f" opacity=".16" font-family="monospace" font-size="18"><text x="34" y="60">RCX // SUBJECT 001</text><text x="34" y="915">ARCHIVE COPY // ROBICHAUX</text></g>
+</svg>
