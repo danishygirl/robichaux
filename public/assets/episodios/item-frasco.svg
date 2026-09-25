@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1100">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#252725"/><stop offset="1" stop-color="#080909"/></linearGradient></defs>
+<rect width="800" height="1100" fill="url(#g)"/><circle cx="590" cy="330" r="260" fill="none" stroke="#8f7857" stroke-opacity=".22" stroke-width="2"/><circle cx="590" cy="330" r="160" fill="none" stroke="#8f7857" stroke-opacity=".14"/><path d="M80 880 L400 160 L720 880 Z" fill="none" stroke="#aa8b5f" stroke-opacity=".18" stroke-width="3"/>
+<text x="400" y="520" text-anchor="middle" font-size="170" fill="#c6aa77" fill-opacity=".62" font-family="Georgia">◈</text>
+<rect x="42" y="42" width="716" height="1016" fill="none" stroke="#c5b892" stroke-opacity=".28" stroke-width="2"/>
+<text x="70" y="940" font-size="32" fill="#d7c8aa" font-family="Arial" letter-spacing="5">ITEM</text>
+<text x="70" y="995" font-size="46" fill="#eee7da" font-family="Georgia">FRASCO</text></svg>
