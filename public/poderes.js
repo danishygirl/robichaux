@@ -7,7 +7,6 @@
 
   const currentPage = document.body.dataset.page || "poderes";
   const nav = document.getElementById("mainNav");
-  const powerButton = document.getElementById("powerButton");
   const grid = document.getElementById("powerGrid");
   const filtersRoot = document.getElementById("powerFilters");
   const filterStatus = document.getElementById("filterStatus");
@@ -90,15 +89,7 @@
     });
     nav.appendChild(fragment);
   }
-
-  if (powerButton) {
-    powerButton.addEventListener("click", () => {
-      document.body.classList.toggle("effects-off");
-      powerButton.classList.toggle("is-off");
-    });
-  }
-
-  if (els.eyebrow) els.eyebrow.textContent = data.page?.eyebrow || "";
+if (els.eyebrow) els.eyebrow.textContent = data.page?.eyebrow || "";
   if (els.title) els.title.textContent = data.page?.title || "PODERES";
   if (els.subtitle) els.subtitle.textContent = data.page?.subtitle || "";
 
@@ -227,110 +218,65 @@
     closeButton?.focus({ preventScroll: true });
   };
 
-const buildCard = (power, sourceIndex) => {
-  const card = document.createElement("button");
+  const buildCard = (power, sourceIndex) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "power-card";
+    card.dataset.powerIndex = String(sourceIndex);
+    card.dataset.powerId = power.id || `power-${sourceIndex + 1}`;
+    card.setAttribute("aria-label", `Abrir ficha do poder ${power.nome || `poder ${sourceIndex + 1}`}`);
 
-  card.type = "button";
-  card.className = "power-card";
+    const accent = document.createElement("span");
+    accent.className = "power-card-accent";
+    accent.setAttribute("aria-hidden", "true");
 
-  card.dataset.powerIndex = String(sourceIndex);
-  card.dataset.powerId = power.id || `power-${sourceIndex + 1}`;
+    const levelFlag = document.createElement("span");
+    levelFlag.className = "power-level-flag";
 
-  card.setAttribute(
-    "aria-label",
-    `Abrir ficha do poder ${power.nome || `poder ${sourceIndex + 1}`}`
-  );
+    const levelText = document.createElement("span");
+    levelText.className = "power-level-text";
+    levelText.textContent = String(Array.isArray(power.levels) ? power.levels.length : 0) || "0";
+    levelFlag.appendChild(levelText);
 
-  // Detalhe decorativo do card
-  const accent = document.createElement("span");
-  accent.className = "power-card-accent";
-  accent.setAttribute("aria-hidden", "true");
+    const symbolBox = document.createElement("span");
+    symbolBox.className = "power-symbol-box";
+    symbolBox.setAttribute("aria-hidden", "true");
 
-  // Número de níveis
-  const levelFlag = document.createElement("span");
-  levelFlag.className = "power-level-flag";
-
-  const levelText = document.createElement("span");
-  levelText.className = "power-level-text";
-
-  levelText.textContent = String(
-    Array.isArray(power.levels) ? power.levels.length : 0
-  );
-
-  levelFlag.appendChild(levelText);
-
-  // Área visual da carta
-  const symbolBox = document.createElement("span");
-  symbolBox.className = "power-symbol-box";
-  symbolBox.setAttribute("aria-hidden", "true");
-
-  // Se existir uma imagem, usa a carta WEBP
- if (power.image) {
-    const image = document.createElement("img");
-    image.className = "power-card-image";
-    image.src = power.image;
-    image.alt = "";
-    image.loading = "lazy";
-    image.decoding = "async";
-
-    card.classList.add("has-card-image");
-    symbolBox.classList.add("has-image");
-    symbolBox.appendChild(image);
-} else {
-    // Se não houver imagem, continua usando o símbolo antigo
     const symbol = document.createElement("span");
-
     symbol.className = "power-symbol";
     symbol.textContent = power.symbol || "✦";
-
     symbolBox.appendChild(symbol);
-  }
 
-  // Textos do card
-  const copy = document.createElement("div");
-  copy.className = "power-copy";
+    const copy = document.createElement("div");
+    copy.className = "power-copy";
 
-  const family = document.createElement("span");
-  family.className = "power-family";
-  family.textContent = power.family || power.origin || "ARCANE";
+    const family = document.createElement("span");
+    family.className = "power-family";
+    family.textContent = power.family || power.origin || "ARCANE";
 
-  const name = document.createElement("h2");
-  name.className = "power-name";
-  name.textContent = power.nome || "SEM NOME";
+    const name = document.createElement("h2");
+    name.className = "power-name";
+    name.textContent = power.nome || "SEM NOME";
 
-  const summary = document.createElement("p");
-  summary.className = "power-summary";
-  summary.textContent = power.summary || "";
+    const summary = document.createElement("p");
+    summary.className = "power-summary";
+    summary.textContent = power.summary || "";
 
-  // Rodapé do card
-  const open = document.createElement("div");
-  open.className = "power-open";
+    const open = document.createElement("div");
+    open.className = "power-open";
 
-  const origin = document.createElement("span");
-  origin.textContent = power.origin || "OPEN FILE";
+    const origin = document.createElement("span");
+    origin.textContent = power.origin || "OPEN FILE";
 
-  const icon = document.createElement("span");
-  icon.setAttribute("aria-hidden", "true");
-  icon.textContent = "↗";
+    const icon = document.createElement("span");
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = "↗";
 
-  open.append(origin, icon);
-
-  copy.append(
-    family,
-    name,
-    summary,
-    open
-  );
-
-  card.append(
-    accent,
-    levelFlag,
-    symbolBox,
-    copy
-  );
-
-  return card;
-};
+    open.append(origin, icon);
+    copy.append(family, name, summary, open);
+    card.append(accent, levelFlag, symbolBox, copy);
+    return card;
+  };
 
   const renderCardsOnce = () => {
     if (!grid) return;

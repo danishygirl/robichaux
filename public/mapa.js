@@ -6,7 +6,6 @@
   if (!site || !data || !Array.isArray(data.places) || !data.places.length) return;
 
   const nav = document.getElementById("mainNav");
-  const powerButton = document.getElementById("powerButton");
   const list = document.getElementById("placesList");
   const dialog = document.getElementById("placeDialog");
   const dialogClose = document.getElementById("placeDialogClose");
@@ -47,15 +46,7 @@
     });
     nav.appendChild(fragment);
   }
-
-  if (powerButton) {
-    powerButton.addEventListener("click", () => {
-      document.body.classList.toggle("effects-off");
-      powerButton.classList.toggle("is-off");
-    });
-  }
-
-  els.eyebrow.textContent = data.page?.eyebrow || "";
+els.eyebrow.textContent = data.page?.eyebrow || "";
   els.title.textContent = data.page?.title || "MAPA";
   els.subtitle.textContent = data.page?.subtitle || "";
   els.count.textContent = String(data.places.length).padStart(2, "0");

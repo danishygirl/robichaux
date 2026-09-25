@@ -10,7 +10,6 @@
   const filtersRoot = document.getElementById("characterFilters");
   const filterStatus = document.getElementById("filterStatus");
   const emptyState = document.getElementById("characterEmpty");
-  const powerButton = document.getElementById("powerButton");
   const dialog = document.getElementById("characterDialog");
   const closeButton = document.getElementById("dossierClose");
 
@@ -442,8 +441,4 @@
     if (event.target === dialog) dialog.close();
   });
 
-  powerButton?.addEventListener("click", () => {
-    document.body.classList.toggle("effects-off");
-    powerButton.classList.toggle("is-off");
-  });
 })();

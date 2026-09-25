@@ -9,7 +9,6 @@
   const currentPage = document.body.dataset.page || "inventario";
 
   const nav = document.getElementById("mainNav");
-  const powerButton = document.getElementById("powerButton");
   const filtersRoot = document.getElementById("catalogFilters");
   const grid = document.getElementById("inventoryGrid");
   const emptyState = document.getElementById("catalogEmpty");
@@ -119,15 +118,7 @@
     });
     nav.appendChild(fragment);
   }
-
-  if (powerButton) {
-    powerButton.addEventListener("click", () => {
-      document.body.classList.toggle("effects-off");
-      powerButton.classList.toggle("is-off");
-    });
-  }
-
-  // ---------- TEXTOS DA PÁGINA ----------
+// ---------- TEXTOS DA PÁGINA ----------
   setOptionalText(pageEls.eyebrow, data.page?.eyebrow);
   setOptionalText(pageEls.title, data.page?.title);
   setOptionalText(pageEls.previewEyebrow, data.page?.previewLabel);

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111312" />
+  <title>COVEN — Episódios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./home.css" />
+  <link rel="stylesheet" href="./episodios.css" />
+</head>
+<body data-page="episodios" class="night-page">
+  <div class="episode-night-bg" aria-hidden="true"></div>
+  <div class="episode-noise" aria-hidden="true"></div>
+  <header class="site-header episode-site-header">
+    <a class="brand" href="./index.html" aria-label="COVEN — Home"><span class="brand-mark">C</span><span class="brand-text">COVEN</span></a>
+    <nav class="main-nav" id="mainNav" aria-label="Menu principal"></nav>
+</header>
+
+  <main class="episodes-stage">
+    <section class="episode-library" id="episodeLibrary" aria-labelledby="episodesTitle">
+      <header class="episode-library-heading">
+        <div><p class="episode-eyebrow" id="episodesEyebrow"></p><h1 id="episodesTitle"></h1></div>
+        <p class="episode-subtitle" id="episodesSubtitle"></p>
+      </header>
+      <div class="episode-rule" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="episode-grid" id="episodeGrid"></div>
+      <p class="episode-empty" id="episodeEmpty" hidden>NENHUM EPISÓDIO REGISTRADO.</p>
+    </section>
+
+    <section class="episode-detail" id="episodeDetail" hidden aria-labelledby="detailEpisodeTitle">
+      <div class="detail-background" id="detailBackground" aria-hidden="true"></div><div class="detail-vignette" aria-hidden="true"></div>
+      <header class="detail-header">
+        <button class="back-button" id="backToEpisodes" type="button">← EPISÓDIOS</button>
+        <div class="detail-episode-meta"><span id="detailEpisodeNumber"></span><h1 id="detailEpisodeTitle"></h1></div>
+        <span class="detail-status" id="detailEpisodeStatus"></span>
+      </header>
+      <div class="quest-mode-tabs" id="questModeTabs" role="tablist" aria-label="Categorias de missões"></div>
+      <div class="quest-layout">
+        <aside class="quest-sidebar"><p class="sidebar-label" id="sidebarLabel">MAIN QUESTS</p><div class="quest-list" id="questList"></div></aside>
+        <section class="quest-content">
+          <div class="quest-copy-panel">
+            <div class="quest-heading-row"><div><span class="quest-code" id="questCode"></span><h2 id="questTitle"></h2></div><span class="quest-state" id="questState"></span></div>
+            <p class="quest-description" id="questDescription"></p>
+            <section class="quest-section" id="objectivesSection"><h3>OBJETIVOS</h3><ol class="objective-list" id="objectiveList"></ol></section>
+            <section class="quest-section" id="rewardsSection"><h3>RECOMPENSAS</h3><div class="reward-list" id="rewardList"></div></section>
+            <section class="quest-section" id="notesSection"><h3>NOTAS</h3><p id="questNotes"></p></section>
+          </div>
+          <aside class="episode-poster-panel"><figure class="detail-poster"><img id="detailPoster" alt="" /><figcaption><span id="detailPosterEpisode"></span><strong id="detailPosterTitle"></strong></figcaption></figure></aside>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script src="./site-data.js"></script><script src="./episodios-data.js"></script><script src="./episodios.js"></script>
+</body>
+</html>

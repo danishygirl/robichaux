@@ -4,7 +4,8 @@ window.COVEN_CONTENT = {
     { id: "personagens", label: "PERSONAGENS", href: "./personagens.html" },
     { id: "poderes", label: "PODERES", href: "./poderes.html" },
     { id: "inventario", label: "INVENTÁRIO", href: "./inventario.html" },
-    { id: "mapa", label: "MAPA", href: "./mapa.html" }
+    { id: "mapa", label: "MAPA", href: "./mapa.html" },
+    { id: "episodios", label: "EPISÓDIOS", href: "./episodios.html" }
 
     // As próximas páginas entram aqui, sem precisar refazer o cabeçalho.
     // Exemplo:

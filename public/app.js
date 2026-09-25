@@ -5,7 +5,6 @@
   const nav = document.getElementById("mainNav");
   const copy = document.getElementById("homeCopy");
   const actions = document.getElementById("homeActions");
-  const powerButton = document.getElementById("powerButton");
   const currentPage = document.body.dataset.page || "home";
 
   if (nav) {
@@ -46,13 +45,6 @@
       }
 
       actions.appendChild(link);
-    });
-  }
-
-  if (powerButton) {
-    powerButton.addEventListener("click", () => {
-      document.body.classList.toggle("effects-off");
-      powerButton.classList.toggle("is-off");
     });
   }
 })();
