@@ -23,15 +23,32 @@
     { label: "DURAÇÃO", value: "2 cenas" }
   ]
 
-  TAGS E EXTRAS
-  Tags são opcionais.
-  rarity, stock, locked e status também são opcionais.
+  TUDO É OPCIONAL
+  - Você pode apagar "player" inteiro e o cabeçalho desaparece.
+  - Dentro de player, pode apagar name, level, xpProgress ou stats.
+  - Se attributes, tags, description, use, rarity, stock, status,
+    xpCost ou image forem removidos de um item, a área correspondente
+    some automaticamente sem deixar buracos no layout.
+  - As imagens SVG deste pacote são apenas placeholders. Você pode usar
+    JPG, PNG ou WebP reais apontando o caminho no campo image.
+
+  LABELS DA INTERFACE
+  Em page você também pode mudar/remover:
+    previewLabel, openLabel, modalTitle e modalHeader.
 */
 
 window.COVEN_INVENTARIO = {
   page: {
     eyebrow: "ROBICHAUX STORE // EXCHANGE",
     title: "INVENTÁRIO",
+    previewLabel: "ACTIVE ITEM",
+    openLabel: "ABRIR FICHA ↗",
+    modalTitle: "ITEM DOSSIER",
+    modalHeader: {
+      line1: "ROBICHAUX SUPPLY ARCHIVE",
+      line2: "INVENTORY EXCHANGE RECORD",
+      line3: "NEW ORLEANS // COVEN MARKET"
+    },
     filters: [
       { id: "todos", label: "TODOS" },
       { id: "habilidades", label: "HABILIDADES" },
@@ -40,8 +57,10 @@ window.COVEN_INVENTARIO = {
     ]
   },
 
+  // Este bloco inteiro pode ser apagado se você não quiser cabeçalho de jogador.
   player: {
     name: "ROBICHAUX MARKET",
+    levelLabel: "LEVEL",
     level: "25",
     xpProgress: "256 / 750 XP",
     stats: [

@@ -3,23 +3,45 @@
 
   const site = window.COVEN_CONTENT;
   const data = window.COVEN_INVENTARIO;
-  if (!site || !data || !Array.isArray(data.items)) return;
+  if (!site || !data) return;
 
+  const items = Array.isArray(data.items) ? data.items : [];
   const currentPage = document.body.dataset.page || "inventario";
+
   const nav = document.getElementById("mainNav");
   const powerButton = document.getElementById("powerButton");
   const filtersRoot = document.getElementById("catalogFilters");
   const grid = document.getElementById("inventoryGrid");
   const emptyState = document.getElementById("catalogEmpty");
+  const previewPanel = document.getElementById("inventoryPreviewPanel");
   const dialog = document.getElementById("itemDialog");
   const closeButton = document.getElementById("itemClose");
   const selectedCard = document.getElementById("selectedCard");
+
+  const pageEls = {
+    eyebrow: document.getElementById("inventoryEyebrow"),
+    title: document.getElementById("inventoryTitle"),
+    playerPanel: document.getElementById("playerPanel"),
+    playerMeta: document.getElementById("playerMeta"),
+    playerName: document.getElementById("playerName"),
+    playerLevelBadge: document.getElementById("playerLevelBadge"),
+    playerLevelLabel: document.getElementById("playerLevelLabel"),
+    playerLevel: document.getElementById("playerLevel"),
+    playerXpProgress: document.getElementById("playerXpProgress"),
+    playerStatsList: document.getElementById("playerStatsList"),
+    activeLabel: document.getElementById("catalogActiveLabel"),
+    count: document.getElementById("catalogCount"),
+    previewEyebrow: document.getElementById("previewEyebrow"),
+    selectedOpenLabel: document.getElementById("selectedOpenLabel")
+  };
 
   const selectedEls = {
     status: document.getElementById("selectedStatus"),
     counter: document.getElementById("selectedCounter"),
     rarity: document.getElementById("selectedRarity"),
+    imageWrap: document.getElementById("selectedImageWrap"),
     image: document.getElementById("selectedImage"),
+    copy: document.getElementById("selectedCopy"),
     category: document.getElementById("selectedCategory"),
     name: document.getElementById("selectedName"),
     summary: document.getElementById("selectedSummary"),
@@ -28,30 +50,27 @@
   };
 
   const modalEls = {
+    headerLine1: document.getElementById("sheetHeaderLine1"),
+    headerLine2: document.getElementById("sheetHeaderLine2"),
+    headerLine3: document.getElementById("sheetHeaderLine3"),
+    titleLabel: document.getElementById("sheetTitleLabel"),
     code: document.getElementById("itemModalCode"),
     family: document.getElementById("itemModalFamily"),
+    media: document.getElementById("itemSheetMedia"),
+    imageFrame: document.getElementById("itemModalImageFrame"),
     image: document.getElementById("itemModalImage"),
     identity: document.getElementById("itemModalIdentity"),
     category: document.getElementById("itemModalCategory"),
     name: document.getElementById("itemModalName"),
     summary: document.getElementById("itemModalSummary"),
+    descriptionSection: document.getElementById("itemModalDescriptionSection"),
     description: document.getElementById("itemModalDescription"),
     useSection: document.getElementById("itemModalUseSection"),
     use: document.getElementById("itemModalUse"),
+    attributesSection: document.getElementById("itemModalAttributesSection"),
     attributes: document.getElementById("itemModalAttributes"),
     tagsSection: document.getElementById("itemModalTagsSection"),
     tags: document.getElementById("itemModalTags")
-  };
-
-  const pageEls = {
-    eyebrow: document.getElementById("inventoryEyebrow"),
-    title: document.getElementById("inventoryTitle"),
-    playerName: document.getElementById("playerName"),
-    playerLevel: document.getElementById("playerLevel"),
-    playerXpProgress: document.getElementById("playerXpProgress"),
-    playerStatsList: document.getElementById("playerStatsList"),
-    activeLabel: document.getElementById("catalogActiveLabel"),
-    count: document.getElementById("catalogCount")
   };
 
   const normalizeKey = (value) =>
@@ -63,17 +82,31 @@
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
 
+  const hasValue = (value) => value !== undefined && value !== null && String(value).trim() !== "";
+
+  const setOptionalText = (el, value) => {
+    if (!el) return false;
+    const visible = hasValue(value);
+    el.hidden = !visible;
+    el.textContent = visible ? String(value) : "";
+    return visible;
+  };
+
   const createField = (label, value, className = "info-field") => {
     const wrapper = document.createElement("dl");
     wrapper.className = className;
+
     const dt = document.createElement("dt");
-    dt.textContent = label;
+    dt.textContent = String(label);
+
     const dd = document.createElement("dd");
     dd.textContent = String(value);
+
     wrapper.append(dt, dd);
     return wrapper;
   };
 
+  // ---------- MENU ----------
   if (nav && Array.isArray(site.menu)) {
     const fragment = document.createDocumentFragment();
     site.menu.forEach((item) => {
@@ -94,25 +127,60 @@
     });
   }
 
-  if (pageEls.eyebrow) pageEls.eyebrow.textContent = data.page?.eyebrow || "";
-  if (pageEls.title) pageEls.title.textContent = data.page?.title || "INVENTÁRIO";
-  if (pageEls.playerName) pageEls.playerName.textContent = data.player?.name || "ROBICHAUX MARKET";
-  if (pageEls.playerLevel) pageEls.playerLevel.textContent = data.player?.level || "--";
-  if (pageEls.playerXpProgress) pageEls.playerXpProgress.textContent = data.player?.xpProgress || "";
+  // ---------- TEXTOS DA PÁGINA ----------
+  setOptionalText(pageEls.eyebrow, data.page?.eyebrow);
+  setOptionalText(pageEls.title, data.page?.title);
+  setOptionalText(pageEls.previewEyebrow, data.page?.previewLabel);
+  setOptionalText(pageEls.selectedOpenLabel, data.page?.openLabel);
 
-  if (pageEls.playerStatsList) {
-    const fragment = document.createDocumentFragment();
-    (data.player?.stats || []).forEach((entry) => {
-      if (!entry?.label || entry.value === undefined) return;
-      fragment.appendChild(createField(entry.label, entry.value, "player-stat"));
-    });
-    pageEls.playerStatsList.replaceChildren(fragment);
-  }
+  setOptionalText(modalEls.headerLine1, data.page?.modalHeader?.line1);
+  setOptionalText(modalEls.headerLine2, data.page?.modalHeader?.line2);
+  setOptionalText(modalEls.headerLine3, data.page?.modalHeader?.line3);
+  setOptionalText(modalEls.titleLabel, data.page?.modalTitle);
 
-  const records = data.items.map((item, sourceIndex) => {
+  // ---------- PAINEL DO JOGADOR / LOJA: 100% OPCIONAL ----------
+  const renderPlayerPanel = () => {
+    const player = data.player;
+    if (!pageEls.playerPanel) return;
+
+    if (!player || typeof player !== "object") {
+      pageEls.playerPanel.hidden = true;
+      return;
+    }
+
+    const stats = Array.isArray(player.stats)
+      ? player.stats.filter((entry) => entry && hasValue(entry.label) && hasValue(entry.value))
+      : [];
+
+    const hasName = setOptionalText(pageEls.playerName, player.name);
+
+    if (pageEls.playerStatsList) {
+      const fragment = document.createDocumentFragment();
+      stats.forEach((entry) => fragment.appendChild(createField(entry.label, entry.value, "player-stat")));
+      pageEls.playerStatsList.replaceChildren(fragment);
+      pageEls.playerStatsList.hidden = stats.length === 0;
+    }
+
+    const hasMeta = hasName || stats.length > 0;
+    if (pageEls.playerMeta) pageEls.playerMeta.hidden = !hasMeta;
+
+    setOptionalText(pageEls.playerLevelLabel, player.levelLabel);
+    const hasLevel = setOptionalText(pageEls.playerLevel, player.level);
+    const hasXpProgress = setOptionalText(pageEls.playerXpProgress, player.xpProgress);
+    const hasLevelBlock = hasLevel || hasXpProgress;
+    if (pageEls.playerLevelBadge) pageEls.playerLevelBadge.hidden = !hasLevelBlock;
+
+    pageEls.playerPanel.hidden = !(hasMeta || hasLevelBlock);
+    pageEls.playerPanel.classList.toggle("has-single-block", hasMeta !== hasLevelBlock);
+  };
+
+  renderPlayerPanel();
+
+  // ---------- REGISTROS ----------
+  const records = items.map((item, sourceIndex) => {
     const rawCategories = Array.isArray(item.categories)
       ? item.categories
-      : item.category !== undefined
+      : hasValue(item.category)
         ? [item.category]
         : [];
 
@@ -124,7 +192,14 @@
     };
   });
 
-  const filters = (Array.isArray(data.page?.filters) ? data.page.filters : []).map((filter, index) => ({
+  const configuredFilters = Array.isArray(data.page?.filters) && data.page.filters.length
+    ? data.page.filters
+    : [
+        { id: "todos", label: "TODOS" },
+        ...Array.from(new Set(records.flatMap((record) => record.categories))).map((id) => ({ id, label: id.toUpperCase() }))
+      ];
+
+  const filters = configuredFilters.map((filter, index) => ({
     id: normalizeKey(filter.id || filter.label || `filter-${index + 1}`),
     label: String(filter.label || filter.id || `FILTRO ${index + 1}`)
   }));
@@ -134,38 +209,47 @@
   }
 
   let activeFilterId = filters[0]?.id || "todos";
-  let selectedIndex = 0;
+  let selectedIndex = records[0]?.sourceIndex ?? -1;
   const filterButtons = new Map();
-
-  const visibleRecords = () => records.filter((record) => activeFilterId === "todos" || record.categories.includes(activeFilterId));
 
   const buildItemCard = (item, sourceIndex) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `inventory-item-card${item.locked ? " is-locked" : ""}`;
     button.dataset.itemIndex = String(sourceIndex);
-    button.setAttribute("aria-label", `Selecionar item ${item.name || `item ${sourceIndex + 1}`}`);
+    button.setAttribute("aria-label", `Selecionar ${item.name || `item ${sourceIndex + 1}`}`);
 
-    const image = document.createElement("img");
-    image.className = "inventory-item-thumb";
-    image.src = item.image || "";
-    image.alt = item.name || "Item";
-    image.loading = sourceIndex < 4 ? "eager" : "lazy";
-    image.decoding = "async";
+    if (hasValue(item.image)) {
+      const image = document.createElement("img");
+      image.className = "inventory-item-thumb";
+      image.src = item.image;
+      image.alt = item.name || "Item";
+      image.loading = sourceIndex < 4 ? "eager" : "lazy";
+      image.decoding = "async";
+      image.addEventListener("error", () => { image.hidden = true; }, { once: true });
+      button.appendChild(image);
+    }
 
-    const name = document.createElement("span");
-    name.className = "inventory-item-name";
-    name.textContent = item.name || "ITEM";
+    if (hasValue(item.name)) {
+      const name = document.createElement("span");
+      name.className = "inventory-item-name";
+      name.textContent = item.name;
+      button.appendChild(name);
+    }
 
-    const badge = document.createElement("span");
-    badge.className = "inventory-item-badge";
-    badge.textContent = item.locked ? "LOCK" : (item.xpCost || "XP");
+    const badgeValue = item.locked ? (item.lockedLabel || "LOCK") : item.xpCost;
+    if (hasValue(badgeValue)) {
+      const badge = document.createElement("span");
+      badge.className = "inventory-item-badge";
+      badge.textContent = badgeValue;
+      button.appendChild(badge);
+    }
 
-    button.append(image, name, badge);
     return button;
   };
 
   const renderGridOnce = () => {
+    if (!grid) return;
     const fragment = document.createDocumentFragment();
     records.forEach((record) => {
       record.card = buildItemCard(record.item, record.sourceIndex);
@@ -174,101 +258,148 @@
     grid.replaceChildren(fragment);
   };
 
+  const getVisibleRecords = () => records.filter((record) => activeFilterId === "todos" || record.categories.includes(activeFilterId));
+
   const syncSelectionStyles = () => {
-    records.forEach((record, index) => {
-      record.card?.classList.toggle("is-selected", index === selectedIndex);
-    });
+    records.forEach((record) => record.card?.classList.toggle("is-selected", record.sourceIndex === selectedIndex));
   };
 
+  // ---------- CARTA DE PRÉVIA: CADA CAMPO É OPCIONAL ----------
   const fillSelectedCard = (item) => {
-    selectedEls.status.textContent = item.status || "DISPONÍVEL";
-    selectedEls.counter.textContent = item.stock || "ITEM";
-    selectedEls.rarity.textContent = item.rarity || "ITEM";
-    selectedEls.image.src = item.image || "";
-    selectedEls.image.alt = item.name || "Item";
-    selectedEls.category.textContent = item.category || "INVENTÁRIO";
-    selectedEls.name.textContent = item.name || "ITEM";
-    selectedEls.summary.textContent = item.summary || "";
-    selectedEls.xpCost.textContent = item.xpCost ? `CUSTO ${item.xpCost}` : "CUSTO —";
+    if (!item || !selectedCard) {
+      if (previewPanel) previewPanel.hidden = true;
+      return;
+    }
 
-    const frag = document.createDocumentFragment();
-    (item.attributes || []).slice(0, 4).forEach((attr) => {
-      if (!attr?.label || attr.value === undefined) return;
-      frag.appendChild(createField(attr.label, attr.value, "mini-stat"));
-    });
-    selectedEls.miniStats.replaceChildren(frag);
+    if (previewPanel) previewPanel.hidden = false;
+
+    setOptionalText(selectedEls.status, item.status);
+    setOptionalText(selectedEls.counter, item.stock);
+    setOptionalText(selectedEls.rarity, item.rarity);
+    setOptionalText(selectedEls.category, item.category);
+    setOptionalText(selectedEls.name, item.name);
+    setOptionalText(selectedEls.summary, item.summary);
+    setOptionalText(selectedEls.xpCost, hasValue(item.xpCost) ? `${item.costLabel || "CUSTO"} ${item.xpCost}` : "");
+
+    const hasImage = hasValue(item.image);
+    selectedCard.classList.toggle("without-image", !hasImage);
+    if (selectedEls.imageWrap) selectedEls.imageWrap.hidden = !hasImage;
+    if (selectedEls.image) {
+      selectedEls.image.hidden = !hasImage;
+      selectedEls.image.src = hasImage ? item.image : "";
+      selectedEls.image.alt = hasImage ? (item.name || "Item") : "";
+    }
+
+    const hasCopy = [item.category, item.name, item.summary].some(hasValue);
+    selectedCard.classList.toggle("without-copy", !hasCopy);
+    if (selectedEls.copy) selectedEls.copy.hidden = !hasCopy;
+
+    if (selectedEls.miniStats) {
+      const validAttributes = Array.isArray(item.attributes)
+        ? item.attributes.filter((attr) => attr && hasValue(attr.label) && hasValue(attr.value))
+        : [];
+      const fragment = document.createDocumentFragment();
+      validAttributes.slice(0, 4).forEach((attr) => fragment.appendChild(createField(attr.label, attr.value, "mini-stat")));
+      selectedEls.miniStats.replaceChildren(fragment);
+      selectedEls.miniStats.hidden = validAttributes.length === 0;
+    }
+
+    const actionsRow = selectedEls.xpCost?.closest(".selected-actions-row");
+    if (actionsRow) {
+      const openVisible = pageEls.selectedOpenLabel && !pageEls.selectedOpenLabel.hidden;
+      const costVisible = selectedEls.xpCost && !selectedEls.xpCost.hidden;
+      actionsRow.hidden = !(openVisible || costVisible);
+    }
   };
 
+  // ---------- MODAL: TODAS AS SEÇÕES OPCIONAIS ----------
   const openModal = (item) => {
-    modalEls.code.textContent = item.code || item.id || "ITEM";
-    modalEls.family.textContent = item.category || "INVENTÁRIO";
-    modalEls.image.src = item.image || "";
-    modalEls.image.alt = item.name || "Item";
-    modalEls.category.textContent = item.category || "INVENTÁRIO";
-    modalEls.name.textContent = item.name || "ITEM";
-    modalEls.summary.textContent = item.summary || "";
-    modalEls.description.textContent = item.description || "";
+    if (!dialog || !item) return;
 
-    const identityFrag = document.createDocumentFragment();
-    [
-      ["CÓDIGO", item.code],
-      ["RARIDADE", item.rarity],
-      ["STATUS", item.status],
-      ["ESTOQUE", item.stock],
-      ["CUSTO", item.xpCost]
-    ].forEach(([label, value]) => {
-      if (value !== undefined && value !== null && value !== "") identityFrag.appendChild(createField(label, value));
-    });
-    modalEls.identity.replaceChildren(identityFrag);
+    setOptionalText(modalEls.code, item.code);
+    setOptionalText(modalEls.family, item.category);
+    setOptionalText(modalEls.category, item.category);
+    setOptionalText(modalEls.name, item.name);
+    setOptionalText(modalEls.summary, item.summary);
 
-    const hasUse = Boolean(item.use);
-    modalEls.useSection.hidden = !hasUse;
-    modalEls.use.textContent = hasUse ? String(item.use) : "";
+    const hasImage = hasValue(item.image);
+    if (modalEls.imageFrame) modalEls.imageFrame.hidden = !hasImage;
+    if (modalEls.image) {
+      modalEls.image.hidden = !hasImage;
+      modalEls.image.src = hasImage ? item.image : "";
+      modalEls.image.alt = hasImage ? (item.name || "Item") : "";
+    }
 
-    const attributesFrag = document.createDocumentFragment();
-    (item.attributes || []).forEach((attr) => {
-      if (!attr?.label || attr.value === undefined) return;
-      attributesFrag.appendChild(createField(attr.label, attr.value, "attribute-field"));
-    });
-    modalEls.attributes.replaceChildren(attributesFrag);
+    const identityPairs = [
+      [item.codeLabel || "CÓDIGO", item.code],
+      [item.rarityLabel || "RARIDADE", item.rarity],
+      [item.statusLabel || "STATUS", item.status],
+      [item.stockLabel || "ESTOQUE", item.stock],
+      [item.costLabel || "CUSTO", item.xpCost]
+    ].filter(([, value]) => hasValue(value));
 
-    if (Array.isArray(item.tags) && item.tags.length) {
-      modalEls.tagsSection.hidden = false;
-      const tagsFrag = document.createDocumentFragment();
-      item.tags.forEach((tag) => {
+    if (modalEls.identity) {
+      const fragment = document.createDocumentFragment();
+      identityPairs.forEach(([label, value]) => fragment.appendChild(createField(label, value)));
+      modalEls.identity.replaceChildren(fragment);
+      modalEls.identity.hidden = identityPairs.length === 0;
+    }
+
+    if (modalEls.media) modalEls.media.hidden = !hasImage && identityPairs.length === 0;
+    dialog.querySelector(".item-sheet-layout")?.classList.toggle("without-media", !hasImage && identityPairs.length === 0);
+
+    const hasDescription = setOptionalText(modalEls.description, item.description);
+    if (modalEls.descriptionSection) modalEls.descriptionSection.hidden = !hasDescription;
+
+    const hasUse = setOptionalText(modalEls.use, item.use);
+    if (modalEls.useSection) modalEls.useSection.hidden = !hasUse;
+
+    const validAttributes = Array.isArray(item.attributes)
+      ? item.attributes.filter((attr) => attr && hasValue(attr.label) && hasValue(attr.value))
+      : [];
+    if (modalEls.attributes) {
+      const fragment = document.createDocumentFragment();
+      validAttributes.forEach((attr) => fragment.appendChild(createField(attr.label, attr.value, "attribute-field")));
+      modalEls.attributes.replaceChildren(fragment);
+    }
+    if (modalEls.attributesSection) modalEls.attributesSection.hidden = validAttributes.length === 0;
+
+    const validTags = Array.isArray(item.tags) ? item.tags.filter(hasValue) : [];
+    if (modalEls.tags) {
+      const fragment = document.createDocumentFragment();
+      validTags.forEach((tag) => {
         const chip = document.createElement("span");
         chip.className = "modal-tag";
         chip.textContent = String(tag);
-        tagsFrag.appendChild(chip);
+        fragment.appendChild(chip);
       });
-      modalEls.tags.replaceChildren(tagsFrag);
-    } else {
-      modalEls.tagsSection.hidden = true;
-      modalEls.tags.replaceChildren();
+      modalEls.tags.replaceChildren(fragment);
     }
+    if (modalEls.tagsSection) modalEls.tagsSection.hidden = validTags.length === 0;
 
     if (!dialog.open) dialog.showModal();
     closeButton?.focus({ preventScroll: true });
   };
 
-  const updateCatalogMeta = (visible) => {
+  const updateCatalogMeta = (visibleCount) => {
     const current = filters.find((filter) => filter.id === activeFilterId);
-    pageEls.activeLabel.textContent = current?.label || "TODOS";
-    pageEls.count.textContent = `${visible.toString().padStart(2, "0")} ITENS`;
+    setOptionalText(pageEls.activeLabel, current?.label);
+    setOptionalText(pageEls.count, `${visibleCount.toString().padStart(2, "0")} ${visibleCount === 1 ? "ITEM" : "ITENS"}`);
   };
 
   const applyFilter = (filterId) => {
     activeFilterId = filterId;
-    let visible = 0;
+    let visibleCount = 0;
+
     records.forEach((record) => {
-      const isVisible = filterId === "todos" || record.categories.includes(filterId);
-      if (record.card) record.card.hidden = !isVisible;
-      if (isVisible) visible += 1;
+      const visible = filterId === "todos" || record.categories.includes(filterId);
+      if (record.card) record.card.hidden = !visible;
+      if (visible) visibleCount += 1;
     });
 
-    const currentVisible = visibleRecords();
+    const currentVisible = getVisibleRecords();
     if (!currentVisible.some((record) => record.sourceIndex === selectedIndex)) {
-      selectedIndex = currentVisible[0]?.sourceIndex ?? 0;
+      selectedIndex = currentVisible[0]?.sourceIndex ?? -1;
     }
 
     filterButtons.forEach((button, id) => {
@@ -277,16 +408,20 @@
       button.setAttribute("aria-pressed", String(active));
     });
 
-    emptyState.hidden = visible !== 0;
+    if (emptyState) emptyState.hidden = visibleCount !== 0;
+    updateCatalogMeta(visibleCount);
     syncSelectionStyles();
-    updateCatalogMeta(visible);
-    const selected = records[selectedIndex];
-    if (selected) fillSelectedCard(selected.item);
+
+    const selectedRecord = records.find((record) => record.sourceIndex === selectedIndex);
+    fillSelectedCard(selectedRecord?.item);
   };
 
   const renderFilters = () => {
+    if (!filtersRoot) return;
     const fragment = document.createDocumentFragment();
-    const countForFilter = (filterId) => filterId === "todos" ? records.length : records.filter((record) => record.categories.includes(filterId)).length;
+    const countForFilter = (filterId) => filterId === "todos"
+      ? records.length
+      : records.filter((record) => record.categories.includes(filterId)).length;
 
     filters.forEach((filter) => {
       const button = document.createElement("button");
@@ -308,21 +443,26 @@
     });
 
     filtersRoot.replaceChildren(fragment);
+    filtersRoot.hidden = filters.length === 0;
   };
 
   selectedCard?.addEventListener("click", () => {
-    const selected = records[selectedIndex];
+    const selected = records.find((record) => record.sourceIndex === selectedIndex);
     if (selected) openModal(selected.item);
   });
 
   grid?.addEventListener("click", (event) => {
     const button = event.target instanceof Element ? event.target.closest(".inventory-item-card") : null;
     if (!button) return;
+
     const index = Number(button.dataset.itemIndex);
     if (!Number.isInteger(index)) return;
-    selectedIndex = index;
+    const record = records.find((entry) => entry.sourceIndex === index);
+    if (!record) return;
+
+    selectedIndex = record.sourceIndex;
     syncSelectionStyles();
-    fillSelectedCard(records[index].item);
+    fillSelectedCard(record.item);
   });
 
   closeButton?.addEventListener("click", () => dialog?.close());
@@ -331,13 +471,19 @@
     const inside = rect.top <= event.clientY && event.clientY <= rect.bottom && rect.left <= event.clientX && event.clientX <= rect.right;
     if (!inside) dialog.close();
   });
+
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && dialog?.open) dialog.close();
   });
 
   renderGridOnce();
   renderFilters();
-  fillSelectedCard(records[selectedIndex]?.item || data.items[0]);
-  syncSelectionStyles();
-  applyFilter(activeFilterId);
+
+  if (records.length === 0) {
+    if (previewPanel) previewPanel.hidden = true;
+    if (emptyState) emptyState.hidden = false;
+    updateCatalogMeta(0);
+  } else {
+    applyFilter(activeFilterId);
+  }
 })();

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#c6c0b5" />
+  <title>COVEN — Mapa</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./home.css" />
+  <link rel="stylesheet" href="./mapa.css" />
+</head>
+<body data-page="mapa">
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="mystic-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="./index.html" aria-label="COVEN — Home">
+      <span class="brand-mark">C</span>
+      <span class="brand-text">COVEN</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="Menu principal"></nav>
+
+    <button class="power-button" id="powerButton" type="button" aria-label="Alternar efeitos visuais" title="Alternar efeitos visuais">
+      <span class="power-icon" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <main class="map-stage">
+    <section class="map-shell" aria-labelledby="mapTitle">
+      <header class="map-heading">
+        <div>
+          <p class="eyebrow" id="mapEyebrow"></p>
+          <h1 id="mapTitle"></h1>
+        </div>
+        <p class="map-subtitle" id="mapSubtitle"></p>
+      </header>
+
+      <div class="map-rule" aria-hidden="true"><span></span><span></span><span></span></div>
+
+      <div class="map-layout">
+        <aside class="places-sidebar" aria-label="Locais de New Orleans">
+          <div class="places-sidebar-head">
+            <span>LOCATION INDEX</span>
+            <span id="placesCount"></span>
+          </div>
+          <nav class="places-list" id="placesList" aria-label="Lista de locais"></nav>
+          <div class="places-sidebar-foot">SCROLL // SELECT LOCATION</div>
+        </aside>
+
+        <section class="place-display" id="placeDisplay" aria-live="polite">
+          <div class="place-visual">
+            <img id="placeImage" src="" alt="" />
+            <div class="place-image-wash" aria-hidden="true"></div>
+            <div class="place-image-texture" aria-hidden="true"></div>
+
+            <div class="place-corner place-corner-tl" aria-hidden="true"></div>
+            <div class="place-corner place-corner-tr" aria-hidden="true"></div>
+            <div class="place-corner place-corner-bl" aria-hidden="true"></div>
+            <div class="place-corner place-corner-br" aria-hidden="true"></div>
+
+            <div class="place-copy">
+              <div class="place-meta-line">
+                <span id="placeDistrict"></span>
+                <span id="placeCode"></span>
+              </div>
+              <h2 id="placeName"></h2>
+              <p id="placeDescription"></p>
+              <div class="place-tags" id="placeTags"></div>
+              <button class="place-detail-button" id="placeDetailButton" type="button">OPEN LOCATION FILE ↗</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="place-dialog" id="placeDialog" aria-labelledby="dialogPlaceName">
+    <article class="place-file">
+      <button class="place-dialog-close" id="placeDialogClose" type="button" aria-label="Fechar local">×</button>
+
+      <div class="place-file-image-wrap">
+        <img id="dialogPlaceImage" src="" alt="" />
+        <div class="place-file-overlay" aria-hidden="true"></div>
+        <div class="place-file-title">
+          <span id="dialogPlaceDistrict"></span>
+          <h2 id="dialogPlaceName"></h2>
+        </div>
+      </div>
+
+      <div class="place-file-body">
+        <div class="place-file-code" id="dialogPlaceCode"></div>
+        <p id="dialogPlaceDescription"></p>
+        <div class="place-file-extras" id="dialogPlaceExtras"></div>
+      </div>
+    </article>
+  </dialog>
+
+  <div class="status-line" aria-hidden="true">
+    <span>ROBICHAUX // ARCHIVE 05</span>
+    <span>NEW ORLEANS LOCATION GUIDE</span>
+  </div>
+
+  <script src="./site-data.js"></script>
+  <script src="./mapa-data.js"></script>
+  <script src="./mapa.js"></script>
+</body>
+</html>

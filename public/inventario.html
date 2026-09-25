@@ -36,12 +36,12 @@
           <h1 id="inventoryTitle"></h1>
         </div>
         <section class="player-panel" id="playerPanel" aria-label="Resumo do jogador">
-          <div class="player-meta">
+          <div class="player-meta" id="playerMeta">
             <h2 id="playerName"></h2>
             <div class="player-stats-list" id="playerStatsList"></div>
           </div>
-          <div class="player-level-badge">
-            <span class="player-level-label">LEVEL</span>
+          <div class="player-level-badge" id="playerLevelBadge">
+            <span class="player-level-label" id="playerLevelLabel">LEVEL</span>
             <strong id="playerLevel"></strong>
             <span class="player-level-xp" id="playerXpProgress"></span>
           </div>
@@ -49,10 +49,10 @@
       </header>
 
       <div class="inventory-columns">
-        <aside class="inventory-preview-panel">
+        <aside class="inventory-preview-panel" id="inventoryPreviewPanel">
           <div class="preview-header-row">
             <div>
-              <p class="preview-eyebrow">ACTIVE ITEM</p>
+              <p class="preview-eyebrow" id="previewEyebrow">ACTIVE ITEM</p>
               <span class="preview-status" id="selectedStatus"></span>
             </div>
             <span class="preview-counter" id="selectedCounter"></span>
@@ -60,17 +60,17 @@
 
           <button class="selected-card" id="selectedCard" type="button" aria-label="Abrir detalhes do item selecionado">
             <span class="selected-flag" id="selectedRarity"></span>
-            <div class="selected-image-wrap">
+            <div class="selected-image-wrap" id="selectedImageWrap">
               <img class="selected-image" id="selectedImage" alt="" />
             </div>
-            <div class="selected-copy">
+            <div class="selected-copy" id="selectedCopy">
               <span class="selected-category" id="selectedCategory"></span>
               <h2 id="selectedName"></h2>
               <p id="selectedSummary"></p>
             </div>
             <div class="selected-actions-row">
               <span class="selected-xp-cost" id="selectedXpCost"></span>
-              <span class="selected-open">ABRIR FICHA ↗</span>
+              <span class="selected-open" id="selectedOpenLabel">ABRIR FICHA ↗</span>
             </div>
           </button>
 
@@ -102,22 +102,22 @@
           <span class="stamp-ring"></span>
           <strong>C</strong>
         </div>
-        <div class="sheet-copy">
-          <span>ROBICHAUX SUPPLY ARCHIVE</span>
-          <span>INVENTORY EXCHANGE RECORD</span>
-          <span>NEW ORLEANS // COVEN MARKET</span>
+        <div class="sheet-copy" id="sheetCopy">
+          <span id="sheetHeaderLine1">ROBICHAUX SUPPLY ARCHIVE</span>
+          <span id="sheetHeaderLine2">INVENTORY EXCHANGE RECORD</span>
+          <span id="sheetHeaderLine3">NEW ORLEANS // COVEN MARKET</span>
         </div>
         <div class="sheet-code" id="itemModalCode"></div>
       </header>
 
       <div class="sheet-titleline">
-        <span>ITEM DOSSIER</span>
+        <span id="sheetTitleLabel">ITEM DOSSIER</span>
         <span id="itemModalFamily"></span>
       </div>
 
       <div class="item-sheet-layout">
-        <section class="item-sheet-media">
-          <div class="item-sheet-image-frame">
+        <section class="item-sheet-media" id="itemSheetMedia">
+          <div class="item-sheet-image-frame" id="itemModalImageFrame">
             <img id="itemModalImage" alt="" />
           </div>
           <div class="item-sheet-identity" id="itemModalIdentity"></div>
@@ -130,7 +130,7 @@
             <p id="itemModalSummary"></p>
           </div>
 
-          <section class="sheet-section">
+          <section class="sheet-section" id="itemModalDescriptionSection">
             <h3>DESCRIÇÃO</h3>
             <p id="itemModalDescription"></p>
           </section>
@@ -140,7 +140,7 @@
             <p id="itemModalUse"></p>
           </section>
 
-          <section class="sheet-section">
+          <section class="sheet-section" id="itemModalAttributesSection">
             <h3>ATRIBUTOS</h3>
             <div class="modal-attributes" id="itemModalAttributes"></div>
           </section>

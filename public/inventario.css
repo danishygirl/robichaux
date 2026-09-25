@@ -825,3 +825,40 @@ body[data-page="inventario"] {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================================
+   INVENTÁRIO 100% EDITÁVEL — ajustes automáticos para campos opcionais
+   ============================================================ */
+
+.player-panel.has-single-block {
+  grid-template-columns: minmax(0, 1fr);
+  width: min(360px, 100%);
+}
+
+.player-panel.has-single-block .player-level-badge {
+  min-height: 150px;
+}
+
+.selected-card.without-image {
+  min-height: 300px;
+}
+
+.selected-card.without-image .selected-copy {
+  padding-top: 34px;
+}
+
+.selected-card.without-copy {
+  min-height: 250px;
+}
+
+.selected-card.without-image.without-copy {
+  min-height: 120px;
+}
+
+.item-sheet-layout.without-media {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+[hidden] {
+  display: none !important;
+}
