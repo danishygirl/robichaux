@@ -35,7 +35,7 @@ window.COVEN_MAP = {
       name: "ACADEMIA ROBICHAUX",
       district: "GARDEN DISTRICT",
       code: "NOLA-01",
-      image: "./assets/mapa/academia-robichaux.svg",
+      image: "./assets/mapa/robichaux.webp",
       description: "A mansão que abriga o coração do Coven. Entre salões antigos, corredores silenciosos e jardins protegidos por magia, a academia funciona como residência, refúgio e centro de treinamento para jovens bruxas.",
       tags: ["Coven", "Residência", "Zona protegida"],
       extras: [
@@ -49,7 +49,7 @@ window.COVEN_MAP = {
       name: "FRENCH QUARTER",
       district: "VIEUX CARRÉ",
       code: "NOLA-02",
-      image: "./assets/mapa/french-quarter.svg",
+      image: "./assets/mapa/frenchquarter.webp",
       description: "O centro histórico de New Orleans concentra música, turistas, casarões antigos e histórias que se recusam a morrer. Para os sobrenaturais, suas ruas funcionam como ponto de encontro, caça e negociação.",
       tags: ["Urbano", "Movimentado", "Sobrenatural"],
       extras: [
