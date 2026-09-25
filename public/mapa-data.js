@@ -63,7 +63,7 @@ window.COVEN_MAP = {
       name: "GARDEN DISTRICT",
       district: "UPTOWN",
       code: "NOLA-03",
-      image: "./assets/mapa/garden-district.svg",
+      image: "./assets/mapa/gardendistrict.webp",
       description: "Casarões imponentes, jardins fechados e famílias antigas fazem do Garden District uma região marcada por prestígio e segredos. Muitas propriedades guardam histórias que nunca chegaram aos registros oficiais.",
       tags: ["Residencial", "Elite", "Histórico"],
       extras: [
