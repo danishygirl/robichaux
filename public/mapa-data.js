@@ -76,7 +76,7 @@ window.COVEN_MAP = {
       name: "LAFAYETTE CEMETERY",
       district: "GARDEN DISTRICT",
       code: "NOLA-04",
-      image: "./assets/mapa/lafayette-cemetery.svg",
+      image: "./assets/mapa/cemetery.webp",
       description: "Um labirinto de túmulos elevados, mausoléus e nomes esquecidos. À noite, o silêncio do cemitério se torna pesado e antigas práticas funerárias parecem deixar rastros no ar.",
       tags: ["Cemitério", "Espiritual", "Ritual"],
       extras: [
@@ -90,7 +90,7 @@ window.COVEN_MAP = {
       name: "JACKSON SQUARE",
       district: "FRENCH QUARTER",
       code: "NOLA-05",
-      image: "./assets/mapa/jackson-square.svg",
+      image: "./assets/mapa/jacksonsquare.webp",
       description: "Praça histórica cercada por arte, música e movimento constante. Leituras de cartas, artistas de rua e pequenas manifestações mágicas podem se esconder perfeitamente entre a multidão.",
       tags: ["Praça", "Público", "Encontros"],
       extras: [
@@ -103,7 +103,7 @@ window.COVEN_MAP = {
       name: "BOURBON STREET",
       district: "FRENCH QUARTER",
       code: "NOLA-06",
-      image: "./assets/mapa/bourbon-street.svg",
+      image: "./assets/mapa/bourbon.webp",
       description: "Neon, música, álcool e multidões tornam Bourbon Street um cenário perfeito para desaparecer à vista de todos. Criaturas, caçadores e oportunistas atravessam as mesmas portas sem saber exatamente quem está ao lado.",
       tags: ["Vida noturna", "Caos", "Caça"],
       extras: [
@@ -117,7 +117,7 @@ window.COVEN_MAP = {
       name: "BAYOU ST. JOHN",
       district: "MID-CITY",
       code: "NOLA-07",
-      image: "./assets/mapa/bayou-st-john.svg",
+      image: "./assets/mapa/bayou.webp",
       description: "Água escura, margens silenciosas e uma história profundamente ligada às tradições locais tornam o Bayou St. John um ponto natural para encontros discretos, rituais e passagens clandestinas.",
       tags: ["Bayou", "Ritual", "Travessia"],
       extras: [
@@ -131,7 +131,7 @@ window.COVEN_MAP = {
       name: "OS PÂNTANOS",
       district: "OUTSKIRTS",
       code: "NOLA-08",
-      image: "./assets/mapa/pantanos.svg",
+      image: "./assets/mapa/pantanos.webp",
       description: "Fora das ruas iluminadas, os pântanos formam um território onde distância, silêncio e vegetação escondem aquilo que não deseja ser encontrado. É um lugar de criaturas, desaparecimentos e pactos antigos.",
       tags: ["Selvagem", "Criaturas", "Perigoso"],
       extras: [
